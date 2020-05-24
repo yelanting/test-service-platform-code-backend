@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.testservice.platform.server.dao.PlatformMapper">
+	<resultMap id="BaseResultMap"
+		type="com.testservice.platform.server.model.Platform">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="platform_name" jdbcType="VARCHAR"
+			property="platformName" />
+		<result column="access_url" jdbcType="VARCHAR"
+			property="accessUrl" />
+		<result column="image_url" jdbcType="VARCHAR"
+			property="imageUrl" />
+		<result column="description" jdbcType="VARCHAR"
+			property="description" />
+		<result column="create_by" jdbcType="VARCHAR"
+			property="createBy" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="last_update_by" jdbcType="VARCHAR"
+			property="lastUpdateBy" />
+		<result column="last_update_time" jdbcType="TIMESTAMP"
+			property="lastUpdateTime" />
+		<result column="remarks" jdbcType="VARCHAR" property="remarks" />
+		<result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,
+		platform_name,
+		access_url,
+		image_url,
+		description,
+		create_by,
+		create_time,
+		last_update_by,
+		last_update_time,
+		remarks,
+		del_flag
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from platform
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		platform
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert"
+		parameterType="com.testservice.platform.server.model.Platform">
+		insert into platform (id,
+		platform_name,
+		access_url,
+		image_url,
+		description,
+		create_by,
+		create_time,
+		last_update_by,
+		last_update_time,
+		remarks,
+		del_flag
+		)
+		values (#{id,jdbcType=BIGINT},
+		#{platformName,jdbcType=VARCHAR},
+		#{accessUrl,jdbcType=VARCHAR},
+		#{imageUrl,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{createBy,jdbcType=VARCHAR},
+		CURRENT_TIMESTAMP(),
+		#{lastUpdateBy,jdbcType=VARCHAR},
+		CURRENT_TIMESTAMP(),
+		#{remarks,jdbcType=VARCHAR},
+		#{delFlag,jdbcType=TINYINT}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.testservice.platform.server.model.Platform">
+		insert into platform
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="platformName != null">
+				platform_name,
+			</if>
+			<if test="accessUrl != null">
+				access_url,
+			</if>
+			<if test="imageUrl != null">
+				image_url,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="lastUpdateBy != null">
+				last_update_by,
+			</if>
+			<if test="lastUpdateTime != null">
+				last_update_time,
+			</if>
+			<if test="remarks != null">
+				remarks,
+			</if>
+			<if test="delFlag != null">
+				del_flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="platformName != null">
+				#{platformName,jdbcType=VARCHAR},
+			</if>
+			<if test="accessUrl != null">
+				#{accessUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="imageUrl != null">
+				#{imageUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateBy != null">
+				#{lastUpdateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateTime != null">
+				#{lastUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.testservice.platform.server.model.Platform">
+		update platform
+		<set>
+			<if test="platformName != null">
+				platform_name = #{platformName,jdbcType=VARCHAR},
+			</if>
+			<if test="accessUrl != null">
+				access_url = #{accessUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="imageUrl != null">
+				image_url = #{imageUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastUpdateBy != null">
+				last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateTime != null">
+				last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remarks != null">
+				remarks = #{remarks,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlag != null">
+				del_flag = #{delFlag,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.testservice.platform.server.model.Platform">
+		update platform
+		set platform_name =
+		#{platformName,jdbcType=VARCHAR},
+		access_url =
+		#{accessUrl,jdbcType=VARCHAR},
+		image_url =
+		#{imageUrl,jdbcType=VARCHAR},
+		description =
+		#{description,jdbcType=VARCHAR},
+		create_by =
+		#{createBy,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		last_update_by =
+		#{lastUpdateBy,jdbcType=VARCHAR},
+		last_update_time =
+		CURRENT_TIMESTAMP(),
+		remarks =
+		#{remarks,jdbcType=VARCHAR},
+		del_flag =
+		#{delFlag,jdbcType=TINYINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="findPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from platform
+	</select>
+
+	<select id="findByPlatformName" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from platform where platform_name = #{platformName}
+	</select>
+	<select id="findPageByLabel" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		<bind name="pattern" value="'%' + _parameter.platformName + '%'" />
+		select
+		<include refid="Base_Column_List" />
+		from platform
+		where platform_name like #{pattern}
+	</select>
+
+	<select id="findPageByPlatformName"
+		parameterType="java.lang.String" resultMap="BaseResultMap">
+		<bind name="pattern" value="'%' + _parameter.platformName + '%'" />
+		select
+		<include refid="Base_Column_List" />
+		from platform
+		where platform_name like #{pattern}
+	</select>
+	<select id="findByLable" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from platform
+		where package_name = #{platformName,jdbcType=VARCHAR}
+	</select>
+
+	<select id="findAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from platform
+	</select>
+</mapper>

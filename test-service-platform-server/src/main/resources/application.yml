@@ -1,0 +1,68 @@
+server:
+   port: 8098
+   address: 0.0.0.0
+   maxPostSize: -1
+   maxHttpHeaderSize: 102400
+spring:
+   mvc:
+      static-path-pattern: /**
+   profiles:
+      active: dev
+   application:
+      name: test-service-platform-server
+   datasource:
+      name: druidDataSource
+      type: com.alibaba.druid.pool.DruidDataSource
+      druid:
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         url: jdbc:mysql://localhost:3306/test_service_platform?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+         username: root
+         password: Admin@1234
+         filters: stat,wall,log4j,config
+         max-active: 100
+         initial-size: 1
+         max-wait: 60000
+         min-idle: 1
+         time-between-eviction-runs-millis: 60000
+         min-evictable-idle-time-millis: 300000
+         validation-query: select 'x'
+         test-while-idle: true
+         test-on-borrow: false
+         test-on-return: false
+         pool-prepared-statements: true
+         max-open-prepared-statements: 50
+         max-pool-prepared-statement-per-connection-size: 20
+   jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+   main:
+      allow-bean-definition-overriding: true
+management:
+   server: 
+      port: 8098
+      address: 0.0.0.0
+   endpoints:
+      web:
+         exposure:
+            include: '*'
+            exclude: shutdown
+         cors:
+            allowed-origins: http://10.0.0.87:8099,http://localhost:8099
+            allowed-methods: GET,POST,PUT,DELETE,OPTIONS,PATCH,TRACE
+      jmx:
+         exposure:
+            exclude: shutdown
+            include: '*'
+      env:
+         enable: true
+   endpoint:
+      health:
+         show-details: ALWAYS
+   security:
+      enabled: false
+# 分页配置
+pagehelper:
+   helperDialect: mysql
+   reasonable: true
+   supportMethodsArguments: true
+   params: count=countSql
